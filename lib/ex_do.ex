@@ -12,7 +12,7 @@ defmodule ExDo do
   def process_response_body(body), do: JSX.decode!(body)
 
   @spec process_response(HTTPoison.Response.t) :: response
-  def process_response(%HTTPoison.Response{status_code: 200, body: body}), do: body
+  def process_response(%HTTPoison.Response{status_code: 200, body: body}), do: { body }
   def process_response(%HTTPoison.Response{status_code: status_code, body: body }), do: { status_code, body }
 
   def delete(path, client, body \\ "") do
@@ -53,13 +53,8 @@ defmodule ExDo do
   end
 
   @spec authorization_header(Client.auth, list) :: list
-  def authorization_header(%{user: user, password: password}, headers) do
-    userpass = "#{user}:#{password}"
-    headers ++ [{"Authorization", "Basic #{:base64.encode(userpass)}"}]
-  end
-
   def authorization_header(%{access_token: token}, headers) do
-    headers ++ [{"Authorization", "token #{token}"}]
+    headers ++ [{"Content-Type", "application/json"}, {"Authorization", "Bearer #{token}"}]
   end
 
   def authorization_header(_, headers), do: headers
