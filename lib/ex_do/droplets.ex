@@ -25,7 +25,7 @@ defmodule ExDo.Droplets do
   @doc """
   Create a new Droplet
   ## Example
-      ExDo.Droplets.create client
+      ExDo.Droplets.create client, body
   """
   @spec create(Client.t, map) :: ExDo.response
   def create(client \\ %Client{}, body) do
