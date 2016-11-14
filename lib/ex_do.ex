@@ -2,18 +2,19 @@ defmodule ExDo do
 
   use HTTPoison.Base
   alias ExDo.Client
+  alias ExDo.Structs.Droplets
 
   @user_agent [{"User-agent", "ex_do"}]
 
-  @type response :: {integer, any} | :jsx.json_term
+  # @type response :: {integer, any} | :jsx.json_term
 
-  @spec process_response_body(binary) :: term
-  def process_response_body(""), do: nil
-  def process_response_body(body), do: JSX.decode!(body)
+  # @spec process_response_body(binary) :: term
+  # def process_response_body(""), do: nil
+  # def process_response_body(body), do: JSX.decode!(body)
 
-  @spec process_response(HTTPoison.Response.t) :: response
-  def process_response(%HTTPoison.Response{status_code: 200, body: body}), do: { body }
-  def process_response(%HTTPoison.Response{status_code: status_code, body: body }), do: { status_code, body }
+  # @spec process_response(HTTPoison.Response.t) :: response
+  # def process_response(%HTTPoison.Response{status_code: 200, body: body}), do: body
+  # def process_response(%HTTPoison.Response{status_code: status_code, body: body }), do: { status_code, body }
 
   def delete(path, client, body \\ "") do
     _request(:delete, url(client, path), client.auth, body)
@@ -44,7 +45,7 @@ defmodule ExDo do
   end
 
   def raw_request(method, url, body \\ "", headers \\ [], options \\ []) do
-    request!(method, url, body, headers, options) |> process_response
+    request!(method, url, body, headers, options)
   end
 
   @spec url(client :: Client.t, path :: binary) :: binary

@@ -41,7 +41,8 @@ defmodule ExDo.Mixfile do
      {:inch_ex, "~> 0.5", only: :docs},
      {:excoveralls, "~> 0.5", only: :test},
      {:exvcr, "~> 0.6", only: :test},
-     {:meck, "~> 0.8", only: :test} ]
+     {:meck, "~> 0.8", only: :test},
+     {:poison, "~> 3.0"} ]
   end
 
   defp package do

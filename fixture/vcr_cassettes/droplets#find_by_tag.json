@@ -1,0 +1,41 @@
+[
+  {
+    "request": {
+      "body": "\"\"",
+      "headers": {
+        "User-agent": "ex_do",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer 7fb0818dec7f61924"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.digitalocean.com/v2/droplets?tag_name=my-tag"
+    },
+    "response": {
+      "body": "{\"droplets\":[],\"links\":{},\"meta\":{\"total\":0}}",
+      "headers": {
+        "Date": "Thu, 10 Nov 2016 22:48:44 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=d3477269f7d7c618140fdb46250fba1831478818124; expires=Fri, 10-Nov-17 22:48:44 GMT; path=/; domain=.digitalocean.com; HttpOnly",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "Ratelimit-Limit": "5000",
+        "Ratelimit-Remaining": "4960",
+        "Ratelimit-Reset": "1478818294",
+        "Status": "200 OK",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Gateway": "Edge Gateway",
+        "X-Request-Id": "5622d959-7b5e-4612-b930-5c9d756b6f4f",
+        "X-Runtime": "0.050393",
+        "X-Xss-Protection": "1; mode=block",
+        "Server": "cloudflare-nginx",
+        "CF-RAY": "2ffd0dbc3f594bed-GRU"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

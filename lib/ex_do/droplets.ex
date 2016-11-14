@@ -1,6 +1,13 @@
 defmodule ExDo.Droplets do
   import ExDo
   alias ExDo.Client
+  alias ExDo.Mappers.Compute
+  alias ExDo.Mappers.Droplet
+  alias ExDo.Mappers.Droplet.Image
+  alias ExDo.Mappers.Droplet.Kernel
+  alias ExDo.Mappers.Droplet.Size
+  alias ExDo.Mappers.Droplet.Networks
+  alias ExDo.Mappers.Droplet.Region
 
   @doc """
   Get a Droplet
@@ -9,7 +16,22 @@ defmodule ExDo.Droplets do
   """
   @spec find(binary, Client.t) :: ExDo.response
   def find(id, client \\ %Client{}) do
-    get "droplets/#{id}", client
+    response = get "droplets/#{id}", client
+    Poison.decode!(response.body, as: %Compute{droplet: %Droplet{image: %Image{}, 
+                                                                kernel: %Kernel{},
+                                                                size: %Size{},
+                                                                networks: %Networks{},
+                                                                region: %Region{}}})
+  end
+
+  @doc """
+  Find a Droplet by tag
+  ## Example
+      ExDo.Droplets.find_by_tag "my-tag", client
+  """
+  @spec find(binary, Client.t) :: ExDo.response
+  def find_by_tag(tag, client \\ %Client{}) do
+    get "droplets?tag_name=#{tag}", client
   end
 
   @doc """
@@ -30,5 +52,15 @@ defmodule ExDo.Droplets do
   @spec create(Client.t, map) :: ExDo.response
   def create(client \\ %Client{}, body) do
     post "droplets", client, body
+  end
+
+  @doc """
+  Destroy a Droplet
+  ## Example
+      ExDo.Droplets.destroy "droplet-id", client
+  """
+  @spec destroy(binary, Client.t) :: ExDo.response
+  def destroy(id, client \\ %Client{}) do
+    delete "droplets/#{id}", client
   end
 end
