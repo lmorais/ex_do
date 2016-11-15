@@ -8,6 +8,7 @@ defmodule ExDo.Droplets do
   alias ExDo.Mappers.Droplet.Size
   alias ExDo.Mappers.Droplet.Networks
   alias ExDo.Mappers.Droplet.Region
+  alias ExDo.Mappers.DropletCreateRequest
 
   @doc """
   Get a Droplet
@@ -47,11 +48,16 @@ defmodule ExDo.Droplets do
   @doc """
   Create a new Droplet
   ## Example
-      ExDo.Droplets.create client, body
+      ExDo.Droplets.create client, payload
   """
-  @spec create(Client.t, map) :: ExDo.response
-  def create(client \\ %Client{}, body) do
-    post "droplets", client, body
+  @spec create(Client.t, DropletCreateRequest.t) :: ExDo.response
+  def create(client \\ %Client{}, payload \\ %DropletCreateRequest{}) do
+    response = post("droplets", client, payload)
+    Poison.decode!(response.body, as: %Compute{droplet: %Droplet{image: %Image{}, 
+                                                                kernel: %Kernel{},
+                                                                size: %Size{},
+                                                                networks: %Networks{},
+                                                                region: %Region{}}})
   end
 
   @doc """

@@ -41,7 +41,7 @@ defmodule ExDo do
   end
 
   def json_request(method, url, body \\ "", headers \\ [], options \\ []) do
-    raw_request(method, url, JSX.encode!(body), headers, options)
+    raw_request(method, url, Poison.encode!(body), headers, options)
   end
 
   def raw_request(method, url, body \\ "", headers \\ [], options \\ []) do
